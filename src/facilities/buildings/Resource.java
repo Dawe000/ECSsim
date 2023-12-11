@@ -11,7 +11,7 @@ public abstract class Resource extends Facility implements Building{
         level = 1;
     }
 
-    public void increaseLevel(){
+        public void increaseLevel(){
         level++;
     }
     public int getLevel(){

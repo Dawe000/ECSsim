@@ -6,9 +6,10 @@ public class Hall extends Resource {
         super(name);
     }
     public int getCapacity(){
-        return (int) (6* Math.pow(2,(level+1)));
+        return (int) (6* Math.pow(2,(level-1)));
     }
     public int getUpgradeCost(){
-        return 100*(level+1);
+        if (level == 4) return -1;
+        else return 100*(level+1);
     }
 }
