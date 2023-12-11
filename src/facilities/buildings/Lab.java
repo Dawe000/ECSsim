@@ -2,7 +2,7 @@ package facilities.buildings;
 
 public class Lab extends Resource {
 
-    Lab(String name){
+    public Lab(String name){
         super(name);
     }
     public int getCapacity(){

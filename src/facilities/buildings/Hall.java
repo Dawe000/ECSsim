@@ -2,7 +2,7 @@ package facilities.buildings;
 
 public class Hall extends Resource {
 
-    Hall(String name){
+    public Hall(String name){
         super(name);
     }
     public int getCapacity(){

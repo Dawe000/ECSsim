@@ -2,7 +2,7 @@ package facilities.buildings;
 
 public class Theatre extends Resource {
 
-    Theatre(String name){
+    public Theatre(String name){
         super(name);
     }
     public int getCapacity(){
