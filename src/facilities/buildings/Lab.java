@@ -12,4 +12,10 @@ public class Lab extends Resource {
         if (level == 5) return -1;
         else return 300*(level+1);
     }
+
+    public Lab clone(){
+        Lab newLab = new Lab(getName());
+        newLab.level = this.level;
+        return newLab;
+    }
 }

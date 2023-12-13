@@ -18,4 +18,6 @@ public abstract class Resource extends Facility implements Building{
         return level;
     }
 
+
+
 }

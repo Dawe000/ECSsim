@@ -12,4 +12,9 @@ public class Theatre extends Resource {
         if (level == 6) return -1;
         else return 200*(level+1);
     }
+    public Theatre clone(){
+        Theatre newTheatre = new Theatre(getName());
+        newTheatre.level = this.level;
+        return newTheatre;
+    }
 }
