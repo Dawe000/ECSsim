@@ -1,6 +1,6 @@
 package facilities;
 
-public class Facility {
+public abstract class Facility {
     String name;
 
     protected Facility(String name){
@@ -10,4 +10,5 @@ public class Facility {
     public String getName(){
         return name;
     }
+    abstract public Facility clone();
 }
