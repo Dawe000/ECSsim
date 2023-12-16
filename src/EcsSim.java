@@ -1,8 +1,10 @@
-import decision.BuildingTest;
+import sim.BuildingTest;
+import sim.TeacherSelect;
 import facilities.Facility;
 import facilities.buildings.Building;
 import facilities.buildings.Hall;
 import facilities.buildings.Lab;
+import sim.teacherReader;
 import university.Staff;
 import university.University;
 
@@ -12,12 +14,35 @@ public class EcsSim {
     University university;
     ArrayList<Staff> staffMarket;
     int currentNewBuilding;
+    TeacherSelect teacherSelect;
+
+    public static void main(String[] args) throws Exception {
+        if (args.length!=3) throw new Exception("Error: should have 3 arguments");
+        teacherReader t = new teacherReader(args[0]);
+        if (!t.fileIsReady()) throw new Exception("Error: file name invalid");
+        try {
+            Integer.parseInt(args[1]);
+        }
+        catch (Exception e){
+            throw new Exception("Second argument should be an integer");
+        }
+        try {
+            Integer.parseInt(args[2]);
+        }
+        catch (Exception e){
+            throw new Exception("Third argument should be an integer");
+        }
+        ArrayList<Staff> staff = t.getStaff();
+        EcsSim sim = new EcsSim(Integer.parseInt(args[1]),staff);
+        sim.Simulate(Integer.parseInt(args[2]));
+    }
 
     EcsSim(int funding, ArrayList<Staff> staff){
         university = new University(funding);
         staffMarket = staff;
         currentNewBuilding = 1;
-
+        teacherSelect = new TeacherSelect(university.humanResource, staffMarket);
+        while (staffMarket.size()<10) staffMarket.add(teacherSelect.generateStaff());
     }
 
     void Simulate() throws Exception {
@@ -64,9 +89,40 @@ public class EcsSim {
         university.fund();
         System.out.println("Budget after student contributions is "+ university.getBudget());
 
+        if (university.humanResource.staffSalary.size()*40<university.estate.getNumberOfStudents()){
+            System.out.println(" ");
+            Staff[] hires = teacherSelect.hire((float) (university.getBudget()*0.1-university.humanResource.getTotalSalary()),university.estate.getNumberOfStudents()).toArray(Staff[]::new);
+            for (Staff s : hires){
+                System.out.println("Hired "+s.name+", with skill " + s.skill);
+            }
+        }
 
+
+        System.out.println(" ");
+        teacherSelect.instruct(university.estate.getNumberOfStudents());
+        university.reputation += university.estate.getNumberOfStudents();
+        System.out.println(university.estate.getNumberOfStudents()+" students instructed this year");
+
+        System.out.println(" ");
         university.budget -= university.estate.getMaintenanceCost();
         System.out.println("Budget after maintenance is "+ university.getBudget());
+
+        System.out.println(" ");
+        university.budget -= university.humanResource.getTotalSalary();
+        System.out.println("Budget after salary is "+ university.getBudget());
+
+        System.out.println(" ");
+        Staff[] lostStaff = teacherSelect.loseStaff();
+        for (Staff s : lostStaff){
+            if(s.yearsOfTeaching==30){
+                System.out.println(s.name+ " has retired");
+            }
+            else{
+                System.out.println(s.name+ " has left");
+            }
+        }
+        System.out.println(" ");
+        System.out.println("Reputation at the end of this year is "+university.getReputation());
 
     }
 

@@ -7,7 +7,7 @@ import facilities.buildings.Hall;
 public class University {
     public float budget;
     public Estate estate;
-    int reputation;
+    public int reputation;
     public HumanResource humanResource;
 
     public University(int funding){

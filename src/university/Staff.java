@@ -1,9 +1,9 @@
 package university;
 
 public class Staff {
-    String name;
+    public String name;
     public int skill;
-    int yearsOfTeaching;
+    public int yearsOfTeaching;
     public int stamina;
 
     public Staff(String name, int skill){
@@ -16,6 +16,7 @@ public class Staff {
     public int instruct(int numberOfStudents){
         if (skill < 100) skill ++;
         stamina = (int) (stamina - java.lang.Math.ceil(numberOfStudents/(20+skill))*20);
+        if (stamina<0) stamina=0;
         return (100*skill)/(100+numberOfStudents);
     }
 

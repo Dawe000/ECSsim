@@ -1,4 +1,4 @@
-package decision;
+package sim;
 
 import facilities.Facility;
 import facilities.buildings.*;
