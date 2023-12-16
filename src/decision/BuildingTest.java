@@ -1,3 +1,5 @@
+package decision;
+
 import facilities.Facility;
 import facilities.buildings.*;
 
@@ -8,12 +10,18 @@ import java.util.List;
 public class BuildingTest {
     ArrayList<Facility> unUpgradeable;
     ArrayList<Facility> upgradeable;
-    String[] built;
-    String[] upgraded;
+    public String[] built;
+    public String[] upgraded;
     ArrayList<BuildingTest> children;
+    boolean[] hallUpgrades;
+    boolean[] labUpgrades;
+    boolean[] theatreUpgrades;
     float budget;
 
     BuildingTest(ArrayList<Facility> unUpgradeable, ArrayList<Facility> upgradeable, String[] built, String[] upgraded, float budget){
+        hallUpgrades= new boolean[]{true,true,true};
+        labUpgrades= new boolean[]{true,true,true,true};
+        theatreUpgrades= new boolean[]{true,true,true,true,true};
         this.unUpgradeable = new ArrayList<Facility>();
         this.upgradeable = new ArrayList<Facility>();
         children = new ArrayList<BuildingTest>();
@@ -29,7 +37,10 @@ public class BuildingTest {
         this.budget = budget;
     }
 
-    BuildingTest(Facility[] currentFacilities, float budget){
+    public BuildingTest(Facility[] currentFacilities, float budget){
+        hallUpgrades= new boolean[]{true,true,true};
+        labUpgrades= new boolean[]{true,true,true,true};
+        theatreUpgrades= new boolean[]{true,true,true,true,true};
         this.unUpgradeable = new ArrayList<Facility>();
         this.upgradeable = new ArrayList<Facility>();
         children = new ArrayList<BuildingTest>();
@@ -43,8 +54,9 @@ public class BuildingTest {
     }
 
     public void getPossibilities(){
+        if (built.length==3||upgraded.length==4||upgraded.length+built.length==5) return;
         if (budget >= 100){ //build new hall
-            Hall f = new Hall("test");
+            Hall f = new Hall("Hall");
             List<String> newBuilt = new ArrayList<String>(Arrays.asList(built));
             newBuilt.add(f.getName());
             ArrayList<Facility> newUpgradeable = new ArrayList<Facility>();
@@ -68,7 +80,7 @@ public class BuildingTest {
             newTest.getPossibilities();
         }
         if (budget >= 300){ //build new lab
-            Lab f = new Lab("test");
+            Lab f = new Lab("Lab");
             List<String> newBuilt = new ArrayList<String>(Arrays.asList(built));
             newBuilt.add(f.getName());
             ArrayList<Facility> newUpgradeable = new ArrayList<Facility>();
@@ -87,12 +99,12 @@ public class BuildingTest {
                             newUpgradeable,
                             newBuilt.toArray(String[]::new),
                             upgraded.clone(),
-                            budget-100);
+                            budget-300);
             children.add(newTest);
             newTest.getPossibilities();
         }
         if (budget >= 200){ //build new theatre
-            Theatre f = new Theatre("test");
+            Theatre f = new Theatre("Theatre");
             List<String> newBuilt = new ArrayList<String>(Arrays.asList(built));
             newBuilt.add(f.getName());
             ArrayList<Facility> newUpgradeable = new ArrayList<Facility>();
@@ -111,7 +123,7 @@ public class BuildingTest {
                             newUpgradeable,
                             newBuilt.toArray(String[]::new),
                             upgraded.clone(),
-                            budget-100);
+                            budget-200);
             children.add(newTest);
             newTest.getPossibilities();
         }
@@ -119,7 +131,8 @@ public class BuildingTest {
     // loop through possible upgrades
         for (Facility f : upgradeable) {
           if (f instanceof Hall) { //upgrade a hall
-            if (((Hall) f).getUpgradeCost() <= budget) {
+            if ((((Hall) f).getUpgradeCost() <= budget)&&(hallUpgrades[((Hall) f).getLevel()-1])) {
+              hallUpgrades[((Hall) f).getLevel()-1] = false;
               List<String> newUpgraded = new ArrayList<String>(Arrays.asList(upgraded));
               newUpgraded.add(f.getName());
               ArrayList<Facility> newUpgradeable = new ArrayList<Facility>();
@@ -145,7 +158,8 @@ public class BuildingTest {
             }
           }
           else if (f instanceof Lab) { //upgrade a lab
-            if (((Lab) f).getUpgradeCost() <= budget) {
+            if ((((Lab) f).getUpgradeCost() <= budget)&&(labUpgrades[((Lab) f).getLevel()-1])) {
+              labUpgrades[((Lab) f).getLevel()-1] = false;
               List<String> newUpgraded = new ArrayList<String>(Arrays.asList(upgraded));
               newUpgraded.add(f.getName());
               ArrayList<Facility> newUpgradeable = new ArrayList<Facility>();
@@ -171,7 +185,8 @@ public class BuildingTest {
             }
           }
           else if (f instanceof Theatre) { //upgrade a theatre
-            if (((Theatre) f).getUpgradeCost() <= budget) {
+            if ((((Theatre) f).getUpgradeCost() <= budget)&&(theatreUpgrades[((Theatre) f).getLevel()-1])) {
+              theatreUpgrades[((Theatre) f).getLevel()-1] = false;
               List<String> newUpgraded = new ArrayList<String>(Arrays.asList(upgraded));
               newUpgraded.add(f.getName());
               ArrayList<Facility> newUpgradeable = new ArrayList<Facility>();
@@ -204,14 +219,14 @@ public class BuildingTest {
         int highestValue = determineLowest(highest);
         float remainingBudget = highest.budget;
         for (BuildingTest b : finalResults){
-            if (determineLowest(b)>highestValue){
+            if (b.determineLowest(b)>highestValue){
                 highest = b;
-                highestValue = determineLowest(b);
+                highestValue = b.determineLowest(b);
                 remainingBudget = b.budget;
             }
-            else if ((determineLowest(b)==highestValue)||(b.budget>remainingBudget)){
+            else if ((b.determineLowest(b)==highestValue)&&(b.budget>remainingBudget)){
                 highest = b;
-                highestValue = determineLowest(b);
+                highestValue = b.determineLowest(b);
                 remainingBudget = b.budget;
             }
 
@@ -219,7 +234,7 @@ public class BuildingTest {
         return highest;
     }
 
-    int determineLowest(BuildingTest b){
+    public int determineLowest(BuildingTest b){
         int hall = 0;
         int lab = 0;
         int theatre = 0;

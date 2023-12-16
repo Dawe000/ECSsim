@@ -12,7 +12,7 @@ public class Estate {
         facilities = new ArrayList<Facility>();
     }
     
-    Facility[] getFacilities(){
+    public Facility[] getFacilities(){
         return facilities.toArray(Facility[]::new);
     }
 
@@ -36,7 +36,7 @@ public class Estate {
         }
     }
 
-    float getMaintenanceCost(){
+    public float getMaintenanceCost(){
         int total = 0;
         for (Facility f : facilities){
             total += ((Resource)f).getCapacity();
@@ -44,7 +44,7 @@ public class Estate {
         return (float)(total * 0.1);
     }
 
-    int getNumberOfStudents(){
+    public int getNumberOfStudents(){
         int hall = 0;
         int lab = 0;
         int theatre = 0;

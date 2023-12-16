@@ -5,7 +5,7 @@ import facilities.buildings.Building;
 import facilities.buildings.Hall;
 
 public class University {
-    float budget;
+    public float budget;
     public Estate estate;
     int reputation;
     public HumanResource humanResource;
@@ -17,7 +17,7 @@ public class University {
         humanResource = new HumanResource();
     }
 
-    Facility build(String type,String name){
+    public Facility build(String type,String name){
         switch (type){
             case "Hall":
                 if (budget>=100) {
@@ -60,7 +60,11 @@ public class University {
 
     }
 
-    void upgrade(Building building) throws Exception{
+    public void fund(){
+        budget+=estate.getNumberOfStudents()*10;
+    }
+
+    public void upgrade(Building building) throws Exception{
         boolean check = false;
         for (Facility b : estate.getFacilities()){
             if (b == building) {check = true; break;}
