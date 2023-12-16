@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws Exception {
 
         /* Test part 4
         Staff prof1 = new Staff("Albert", 23);
@@ -34,6 +34,7 @@ public class Main {
         System.out.println(prof1.stamina + " " + prof1.skill);
          */
 
+        /*
         Lab l1 = new Lab("lab1");
         Lab l2 = new Lab("lab2");
         Lab l3 = new Lab("lab3");
@@ -50,11 +51,22 @@ public class Main {
         f.add(t1);
         f.add(t2);
         Facility[] facilities = f.toArray(Facility[]::new);
-        BuildingTest test = new BuildingTest(facilities,500);
+        decision.BuildingTest test = new decision.BuildingTest(facilities,500);
         test.getPossibilities();
-        BuildingTest result = test.findBestCount();
+        decision.BuildingTest result = test.findBestCount();
+        */
+        Staff prof1 = new Staff("Albert", 23);
+        Staff prof2 = new Staff("Ben", 89);
+        Staff prof3 = new Staff("Carol", 44);
+        Staff prof4 = new Staff("Dave", 95);
+        ArrayList<Staff> staff = new ArrayList<Staff>();
+        staff.add(prof1);
+        staff.add(prof2);
+        staff.add(prof3);
+        staff.add(prof4);
+        EcsSim sim = new EcsSim(600,staff);
+        sim.Simulate(50);
+
         System.in.read();
-
-
     }
 }
