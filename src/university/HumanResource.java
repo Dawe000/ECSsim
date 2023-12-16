@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class HumanResource {
-    HashMap<Staff,Float> staffSalary;
+    public HashMap<Staff,Float> staffSalary;
     HumanResource(){
         staffSalary = new HashMap<Staff,Float>();
     }

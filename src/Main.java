@@ -1,13 +1,7 @@
-import facilities.Facility;
-import facilities.buildings.Lab;
-import facilities.buildings.Hall;
-import facilities.buildings.Theatre;
+import sim.teacherReader;
 import university.Staff;
-import university.University;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
   public static void main(String[] args) throws Exception {
@@ -55,6 +49,7 @@ public class Main {
         test.getPossibilities();
         decision.BuildingTest result = test.findBestCount();
         */
+        /*
         Staff prof1 = new Staff("Albert", 23);
         Staff prof2 = new Staff("Ben", 89);
         Staff prof3 = new Staff("Carol", 44);
@@ -64,9 +59,12 @@ public class Main {
         staff.add(prof2);
         staff.add(prof3);
         staff.add(prof4);
-        EcsSim sim = new EcsSim(600,staff);
+        EcsSim sim = new EcsSim(1000,staff);
         sim.Simulate(50);
 
+        */
+        teacherReader t = new teacherReader("staff.txt");
+        ArrayList<Staff> staff = t.getStaff();
         System.in.read();
     }
 }
