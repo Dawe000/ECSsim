@@ -1,7 +1,10 @@
 package facilities.buildings;
 
 public class Theatre extends Resource {
-
+    /**
+     * Constructor for Theatre
+     * @param name String: name of the Theatre
+     */
     public Theatre(String name){
         super(name);
     }

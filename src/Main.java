@@ -1,4 +1,4 @@
-import sim.teacherReader;
+import sim.TeacherReader;
 import university.Staff;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class Main {
         sim.Simulate(50);
 
         */
-        teacherReader t = new teacherReader("staff.txt");
+        TeacherReader t = new TeacherReader("staff.txt");
         ArrayList<Staff> staff = t.getStaff();
         System.in.read();
     }
