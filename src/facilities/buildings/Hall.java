@@ -1,7 +1,10 @@
 package facilities.buildings;
 
 public class Hall extends Resource {
-
+    /**
+     * Constructor for Hall
+     * @param name String: name of the Hall
+     */
     public Hall(String name){
         super(name);
     }

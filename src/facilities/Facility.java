@@ -1,6 +1,10 @@
 package facilities;
 
 public abstract class Facility {
+
+    /**
+     * Abstract class for buildings with getter for name, constructor and abstract clone function
+     */
     String name;
 
     protected Facility(String name){
@@ -10,5 +14,10 @@ public abstract class Facility {
     public String getName(){
         return name;
     }
+
+    /**
+     * Copies an objects properties and returns the new object
+     * @return Facility
+     */
     abstract public Facility clone();
 }

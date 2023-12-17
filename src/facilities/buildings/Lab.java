@@ -1,7 +1,10 @@
 package facilities.buildings;
 
 public class Lab extends Resource {
-
+    /**
+     * Constructor for Lab
+     * @param name String: name of the Lab
+     */
     public Lab(String name){
         super(name);
     }
