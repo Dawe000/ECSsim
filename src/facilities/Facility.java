@@ -1,10 +1,10 @@
 package facilities;
-
+/**
+ * Abstract class for buildings with getter for name, constructor and abstract clone function
+ */
 public abstract class Facility {
 
-    /**
-     * Abstract class for buildings with getter for name, constructor and abstract clone function
-     */
+
     String name;
 
     protected Facility(String name){

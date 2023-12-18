@@ -2,11 +2,11 @@ package facilities.buildings;
 
 import facilities.Facility;
 
-
+/**
+ * Abstract class for buildings
+ */
 public abstract class Resource extends Facility implements Building{
-    /**
-     * Abstract class for buildings
-     */
+
     int level;
 
     /**

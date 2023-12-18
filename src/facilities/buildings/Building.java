@@ -1,7 +1,11 @@
 package facilities.buildings;
 
+/**
+ * Interface for building objects
+ */
+
 public interface Building {
-    //Interface for building objects
+
 
     /**
      * Returns level of the building

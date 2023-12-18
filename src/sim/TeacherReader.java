@@ -6,13 +6,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-
+/**
+ * This class has the purpose of reading a staff config file
+ * and outputting a list of staff objects created
+ */
 public class TeacherReader {
 
-    /**
-     * This class has the purpose of reading a staff config file
-     * and outputting a list of staff objects created
-     */
+
     BufferedReader reader;
 
     /**

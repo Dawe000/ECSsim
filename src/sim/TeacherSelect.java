@@ -6,13 +6,13 @@ import university.Staff;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
+/**
+ * This class handles all aspects of deciding what
+ * staff join the school, who they instruct and if
+ * they leave
+ */
 public class TeacherSelect {
-    /**
-     * This class handles all aspects of deciding what
-     * staff join the school, who they instruct and if
-     * they leave
-     */
+
     HumanResource humanResource;
     ArrayList<Staff> market;
     int currentNewTeacher;
@@ -35,9 +35,9 @@ public class TeacherSelect {
      * @return ArrayList<staff>: newly hired staff members
      */
     public ArrayList<Staff> hire(float budget,int students){
-        ArrayList<Staff> hires = new ArrayList<Staff>();
+        ArrayList<Staff> hires = new ArrayList<>();
         Random r = new Random();
-        int n = 0;
+        int n;
         while (humanResource.staffSalary.size()*30<students){ //condition is so that the teacher to student ratio isn't too disproportionate
             n = r.nextInt(market.size());
             if (market.toArray(Staff[]::new)[n].skill*0.105<=budget){//assumes all staff are allocated the maximum salary
@@ -71,16 +71,17 @@ public class TeacherSelect {
      * Splits the student population evenly amongst the Staff and calls instruct on all of them.
      * @param students int: number of students being instructed
      */
-    public void instruct(int students){
+    public int instruct(int students){
         Iterator<Staff> i = humanResource.getStaff();
         int per = students/humanResource.staffSalary.size();
         int rem = students%humanResource.staffSalary.size();
         i.next().instruct(per+rem);
-
+        int rep = 0;
         while (i.hasNext()){
-            i.next().instruct(per);
+            rep+=i.next().instruct(per);
 
         }
+        return rep;
     }
 
     /**
@@ -90,11 +91,11 @@ public class TeacherSelect {
      */
     public Staff[] loseStaff(){
         Random r = new Random();
-        ArrayList<Staff> lostStaff = new ArrayList<Staff>();
+        ArrayList<Staff> lostStaff = new ArrayList<>();
         Iterator<Staff> i = humanResource.getStaff();
         while(i.hasNext()){
             Staff s = i.next();
-            s.yearsOfTeaching++;
+            s.increaseYearsOfTeaching();
             if (s.stamina<r.nextFloat()*100){//burnout
                 market.add(s);
                 lostStaff.add(s);

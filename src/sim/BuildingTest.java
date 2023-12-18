@@ -6,19 +6,19 @@ import facilities.buildings.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * The BuildingTest class creates a tree of possibilities of what
+ * can be built and upgraded, then chooses the most optimal option.
+ * Certain limitations have been imposed, such as a maximum of 3
+ * new buildings to promote upgrades (as before the algorithm tended
+ * to only build new buildings rather than upgrade existing ones) and
+ * a maximum of 5 buildings and upgrades in total as any more would
+ * slow down the program significantly. As a result the algorithm is
+ * run multiple times in a row to make use of all available funds
+ */
 public class BuildingTest {
 
-    /**
-     * The BuildingTest class creates a tree of possibilities of what
-     * can be built and upgraded, then chooses the most optimal option.
-     * Certain limitations have been imposed, such as a maximum of 3
-     * new buildings to promote upgrades (as before the algorithm tended
-     * to only build new buildings rather than upgrade existing ones) and
-     * a maximum of 5 buildings and upgrades in total as any more would
-     * slow down the program significantly. As a result the algorithm is
-     * run multiple times in a row to make use of all available funds
-     */
+
     ArrayList<Facility> unUpgradeable;
     ArrayList<Facility> upgradeable;
     public String[] built;

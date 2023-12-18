@@ -4,19 +4,36 @@ import facilities.Facility;
 import facilities.buildings.*;
 
 import java.util.ArrayList;
-
+/**
+ * This class administrates all buildings that
+ * are owned by the University
+ */
 public class Estate {
+
     ArrayList<Facility> facilities;
 
+    /**
+     * Constructor for Estate
+     */
     Estate(){
         facilities = new ArrayList<Facility>();
     }
-    
+
+    /**
+     * Outputs all facilities owned by the University
+     * @return Facility[]: facilities owned by the University
+     */
     public Facility[] getFacilities(){
         return facilities.toArray(Facility[]::new);
     }
 
-    Facility addFacility(String type, String name){
+    /**
+     * Adds a new facility to the Estate
+     * @param type String: Hall, Lab or Theatre
+     * @param name String: name for the new buidling
+     * @return Facility: new building
+     */
+    Facility addFacility(String type, String name) throws Exception {
         switch (type){
             case "Hall":
                 Hall newHall = new Hall(name);
@@ -31,11 +48,14 @@ public class Estate {
                 facilities.add(newTheatre);
                 return newTheatre;
             default:
-                System.out.println("This is not a type of facility.");
-                return null;
+                throw new Exception("This is not a type of facility.");
         }
     }
 
+    /**
+     * Finds the total maintenance cost of all the buildings
+     * @return float: total cost
+     */
     public float getMaintenanceCost(){
         int total = 0;
         for (Facility f : facilities){
@@ -44,6 +64,11 @@ public class Estate {
         return (float)(total * 0.1);
     }
 
+    /**
+     * Gets the total number of students which is the smallest of the
+     * total Hall, Lab or Estate population
+     * @return int: number of students
+     */
     public int getNumberOfStudents(){
         int hall = 0;
         int lab = 0;

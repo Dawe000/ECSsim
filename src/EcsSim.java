@@ -125,8 +125,7 @@ public class EcsSim {
 
         //calls instruct on all staff and increases University reputation
         System.out.println(" ");
-        teacherSelect.instruct(university.estate.getNumberOfStudents());
-        university.reputation += university.estate.getNumberOfStudents();
+        university.reputation += teacherSelect.instruct(university.estate.getNumberOfStudents());
         System.out.println(university.estate.getNumberOfStudents()+" students instructed this year");
 
         //budget reduced by building maintenance cost
